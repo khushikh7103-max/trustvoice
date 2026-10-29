@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TrustVoice | Confidential Employee Feedback</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231e40af'/><path d='M8 11h16v9H15l-5 4v-4H8z' fill='white'/></svg>">
+<style>
+:root{--bg:#f3f5f8;--card:#fff;--ink:#0f172a;--mute:#64748b;--line:#dfe4ec;--head:#0f1f3d;--pri:#1e40af;--pri2:#1d4ed8;--soft:#eaf0fd;--ok:#157347;--bad:#b42318;--warn:#a15c07;--okbg:#e7f5ee;--badbg:#fdecea;--warnbg:#fdf3e1;--shadow:0 1px 2px rgba(15,23,42,.05),0 4px 14px rgba(15,23,42,.05)}
+[data-theme=dark]{--bg:#0e1420;--card:#161e2e;--ink:#e6ebf5;--mute:#94a3b8;--line:#263146;--head:#0a101c;--pri:#5b8def;--pri2:#7aa2f7;--soft:#1b2842;--ok:#4cc38a;--bad:#ff8479;--warn:#e9b44c;--okbg:#10291f;--badbg:#341a18;--warnbg:#33270f;--shadow:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.55 Inter,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+header{background:var(--head);color:#fff}.hin{max-width:1120px;margin:auto;padding:0 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;padding:14px 0;font-weight:700;font-size:18px;letter-spacing:-.2px}.brand svg{flex:none}.brand small{display:block;font-weight:400;font-size:11.5px;opacity:.7;letter-spacing:.2px}
+nav{display:flex;gap:2px;flex-wrap:wrap;flex:1}nav button{background:none;border:0;color:rgba(255,255,255,.72);padding:20px 14px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav button:hover{color:#fff}nav button.on{color:#fff;border-color:#6ea0ff}
+.mode{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer}
+main{max-width:1120px;margin:auto;padding:28px 24px 80px}section{display:none}section.on{display:block}
+.pg{margin-bottom:22px}.pg h1{font-size:26px;margin:0 0 4px;letter-spacing:-.5px}.pg p{margin:0;color:var(--mute);max-width:680px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:18px;box-shadow:var(--shadow)}
+h2{font-size:16px;margin:0 0 3px;font-weight:650}h3{font-size:13px;margin:16px 0 6px;font-weight:650}.mute{color:var(--mute)}.small{font-size:13px}
+.two{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;align-items:start}@media(max-width:860px){.two{grid-template-columns:1fr}}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--mute);margin:14px 0 5px}
+textarea,input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);font:inherit;outline:none}
+textarea:focus,input:focus,select:focus{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(29,78,216,.15)}textarea{min-height:140px;resize:vertical}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;background:var(--card);color:var(--mute);padding:9px 18px;font:inherit;font-weight:600;cursor:pointer}.seg button+button{border-left:1px solid var(--line)}.seg button.on{background:var(--pri);color:#fff}
+.btn{border:1px solid var(--pri);background:var(--pri);color:#fff;border-radius:7px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;transition:.15s}.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.5}
+.btn.g{background:var(--card);color:var(--ink);border-color:var(--line)}.btn.g:hover{background:var(--bg)}.btn.sm{padding:6px 12px;font-size:13px}.btn.ok{background:var(--ok);border-color:var(--ok)}.btn.bd{background:var(--card);color:var(--bad);border-color:var(--bad)}
+a.btn{text-decoration:none;display:inline-block}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row.sb{justify-content:space-between}.count{font-size:12px;color:var(--mute);text-align:right;margin-top:3px}
+.prev{margin-top:12px;padding:12px 14px;background:var(--bg);border:1px solid var(--line);border-radius:7px;font-size:13.5px;min-height:48px}.prev b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mute);margin-bottom:3px}
+.mk{background:var(--soft);color:var(--pri);padding:1px 7px;border-radius:4px;font-size:12px;font-weight:600;border:1px solid var(--line)}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:12px 0 4px}.scale button{border:1px solid var(--line);background:var(--card);border-radius:7px;padding:9px 2px;cursor:pointer;font:inherit;color:var(--ink);transition:.15s}.scale button b{display:block;font-size:17px}.scale button span{font-size:10.5px;color:var(--mute)}
+.scale button:hover{border-color:var(--pri2)}.scale button.sel{background:var(--pri);border-color:var(--pri)}.scale button.sel b,.scale button.sel span{color:#fff}
+.pledge{list-style:none;padding:0;margin:10px 0 0}.pledge li{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}.pledge li:first-child{border:0}.pledge svg{flex:none;margin-top:3px;color:var(--ok)}
+.receipt{border:1px solid var(--ok);background:var(--okbg);border-radius:10px;padding:20px;margin-bottom:18px}.receipt h2{color:var(--ok)}
+.code{display:inline-block;font:700 26px ui-monospace,Menlo,Consolas,monospace;letter-spacing:3px;padding:8px 16px;margin:10px 0;border:1px dashed var(--ok);border-radius:8px;background:var(--card);user-select:all}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}.idea{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--pri2);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+.vote{align-self:flex-start;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:7px;padding:6px 14px;font:inherit;font-weight:600;font-size:13px;cursor:pointer}.vote:hover:not(:disabled){border-color:var(--pri2);color:var(--pri2)}.vote:disabled{background:var(--soft);color:var(--pri);border-color:var(--pri2)}
+.steps{display:flex;align-items:flex-start;margin:20px 0 10px}.step{width:110px;text-align:center;font-size:12.5px;color:var(--mute)}.dot{width:30px;height:30px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:var(--card);border:2px solid var(--line);font-weight:700;font-size:13px}
+.step.done{color:var(--ink);font-weight:600}.step.done .dot{background:var(--pri);border-color:var(--pri);color:#fff}.bar{flex:1;height:2px;background:var(--line);margin-top:15px}.bar.done{background:var(--pri)}
+.bubble{background:var(--soft);border-left:4px solid var(--pri);border-radius:6px;padding:12px 15px;margin:12px 0}.bubble .small{font-weight:600;color:var(--pri);margin-bottom:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px}.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}.kpi .l{font-size:12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.6px}.kpi .n{font-size:30px;font-weight:700;letter-spacing:-1px;margin-top:2px}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:860px){.charts{grid-template-columns:1fr}}
+.q{border:1px solid var(--line);border-radius:8px;padding:14px;margin:12px 0;background:var(--card)}
+.chip{display:inline-block;padding:2px 9px;border-radius:4px;font-size:12px;font-weight:600;background:var(--soft);color:var(--pri);margin:0 5px 4px 0}.chip.k{background:var(--badbg);color:var(--bad)}.chip.i{background:var(--warnbg);color:var(--warn)}
+.fu{border-left:3px solid var(--warn);background:var(--warnbg);padding:6px 11px;margin:8px 0;border-radius:0 6px 6px 0;font-size:13.5px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mute);font-weight:650}.num{text-align:right}
+.meter{height:7px;background:var(--line);border-radius:5px;overflow:hidden;min-width:80px;flex:1}.meter i{display:block;height:100%;background:var(--pri2)}
+svg text{fill:var(--mute);font-size:9px;font-family:inherit}
+.theme{padding:12px 0;border-top:1px solid var(--line)}.theme:first-of-type{border:0}.quote{color:var(--mute);font-style:italic;font-size:13.5px;margin-top:4px;padding-left:10px;border-left:2px solid var(--line)}
+.empty{text-align:center;color:var(--mute);padding:28px 10px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;font-size:14px}.kv dt{color:var(--mute)}.kv dd{margin:0;word-break:break-all}code{background:var(--bg);border:1px solid var(--line);padding:1px 6px;border-radius:4px;font-size:12.5px}
+#toast{position:fixed;right:22px;bottom:22px;background:var(--head);color:#fff;padding:11px 18px;border-radius:8px;font-size:14px;z-index:50;transform:translateY(80px);opacity:0;transition:.3s;box-shadow:var(--shadow)}#toast.show{transform:none;opacity:1}
+@media print{header,nav,.noprint,#toast,#leadBody{display:none!important}body{background:#fff}main{padding:0}.card{box-shadow:none;break-inside:avoid}section:not(#lead){display:none!important}}
+.lv{display:inline-block;padding:2px 9px;border-radius:4px;font-size:12px;font-weight:700;margin-right:6px}.lv.c{background:var(--bad);color:#fff}.lv.h{background:var(--warn);color:#fff}.lv.m{background:var(--warnbg);color:var(--warn)}.lv.l{background:var(--soft);color:var(--mute)}
+.lock{max-width:400px;margin:36px auto}.err{color:var(--bad);font-size:13px;margin-top:8px}
+</style></head><body>
+<header><div class="hin">
+ <div class="brand"><svg width="30" height="30" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#2f5fd0"/><path d="M8 11h16v9H15l-5 4v-4H8z" fill="#fff"/></svg><div>TrustVoice<small>Confidential employee feedback</small></div></div>
+ <nav id="nav"></nav><button class="mode" id="tg" onclick="theme()">Dark mode</button></div></header>
+<main>
+
+<section id="speak">
+ <div class="pg"><h1>Share feedback confidentially</h1><p>Raise a concern or suggest an improvement. No login is needed and no name, IP address or exact date is stored. Personal details in your message are masked before it is saved.</p></div>
+ <div class="two"><div>
+  <div class="card"><div class="seg" id="kindSeg"><button class="on" data-k="concern" onclick="kind('concern')">Concern</button><button data-k="idea" onclick="kind('idea')">Idea</button></div>
+   <label for="dept">Your team <span class="mute" style="font-weight:400">(groups smaller than <span id="kmin">5</span> people are never reported)</span></label><select id="dept"></select>
+   <label for="text" id="tl">Describe your concern</label><textarea id="text" maxlength="1500" oninput="typing()" placeholder="Describe what happened, when it happens, and the effect on you or the team."></textarea>
+   <div class="count"><span id="cc">0</span> / 1500</div>
+   <div class="prev"><b>What will be saved (after masking)</b><span id="pv" class="mute">Your masked message will appear here as you type.</span></div>
+   <div class="row sb" style="margin-top:14px"><span class="small mute">Names, phone numbers, emails and ID numbers are masked automatically.</span><button class="btn" id="sendBtn" onclick="send()">Submit confidentially</button></div></div>
+  <div id="done"></div>
+ </div><div>
+  <div class="card"><h2>Weekly pulse</h2><div class="small mute">How was your week overall? Uses the team selected on the left.</div>
+   <div class="scale" id="moods"></div><div id="pulseMsg" class="small mute"></div></div>
+  <div class="card"><h2>Our commitments</h2><ul class="pledge" id="pledge"></ul></div>
+ </div></div>
+</section>
+
+<section id="ideas"><div class="pg"><h1>Ideas board</h1><p>Suggestions reviewed and approved by HR. Support the ones you would like to see implemented.</p></div>
+ <div class="row" style="margin-bottom:16px"><button class="btn" onclick="show('speak');kind('idea')">Submit an idea</button></div><div class="ideas" id="ideaList"></div></section>
+
+<section id="mine"><div class="pg"><h1>Track a submission</h1><p>Enter the receipt code you were given. You can see the status, read any reply from HR, and add more detail, still anonymously.</p></div>
+ <div class="card"><label for="tok" style="margin-top:0">Receipt code</label><div class="row"><input id="tok" placeholder="FB-XXXXXXXX" style="max-width:280px;text-transform:uppercase" onkeydown="if(event.key==='Enter')check()"><button class="btn" onclick="check()">Look up</button></div><div id="tokOut"></div></div></section>
+
+<section id="hr">
+ <div class="card lock" id="login"><h2>HR console sign-in</h2><input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()"><div style="margin-top:14px"><button class="btn" onclick="login()">Sign in</button></div><div id="loginErr" class="err"></div></div>
+ <div id="hrBody" style="display:none">
+  <div class="pg row sb"><div><h1>HR console</h1><p>Review messages, publish ideas, and approve summaries for leadership.</p></div><button class="btn g sm" onclick="logout()">Sign out</button></div>
+  <div class="kpis" id="tiles"></div>
+  <div class="charts"><div class="card"><h2>Mood trend</h2><div class="small mute">Average weekly pulse (1 to 5). Hidden when fewer than 5 responses.</div><div id="moodChart"></div></div>
+   <div class="card"><h2>Messages per week</h2><div class="small mute">Last 8 weeks</div><div id="volChart"></div></div></div>
+  <div class="card"><div class="row sb"><div><h2>Review queue</h2><div class="small mute">Sorted by predicted urgency. Read each message, choose an action, and optionally write a reply the author can read with their receipt code.</div></div><div class="row"><select id="qlv" style="width:auto" onchange="drawQueue()"><option value="">All urgency levels</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select><select id="qf" style="width:auto" onchange="drawQueue()"></select></div></div><div id="queue"></div></div>
+  <div class="card"><h2>Ideas awaiting publication</h2><div class="small mute">Approved ideas appear on the public ideas board.</div><div id="pend"></div></div>
+  <div class="card"><div class="row sb"><div><h2>Teams</h2><div class="small mute">Teams with fewer messages than the privacy threshold are hidden.</div></div><a class="btn g sm" href="/api/hr/export.csv">Export team summary (CSV)</a></div><div id="depts"></div></div>
+  <div class="card"><h2>Theme summaries</h2><div class="small mute">Generate a draft, review it, then approve it for leadership.</div>
+   <div class="row" style="margin-top:10px"><select id="sumDept" style="width:auto"></select><button class="btn sm" onclick="mkSummary()">Generate draft</button><span id="sumMsg" class="small err" style="margin:0"></span></div><div id="drafts"></div></div>
+  <div class="card"><div class="row sb"><div><h2>Data and storage</h2><div class="small mute">Where the application data lives.</div></div><a class="btn g sm" href="/api/hr/export-all.csv">Export all messages (CSV)</a></div><dl class="kv" id="store" style="margin-top:12px"></dl></div>
+ </div>
+</section>
+
+<section id="lead"><div class="pg row sb"><div><h1>Leadership summary</h1><p>Shows only summaries approved by HR. Individual messages are never displayed here.</p></div><div class="row noprint"><button class="btn" onclick="mkReport()">Generate leadership report</button></div></div>
+ <div id="reportBox" style="display:none"></div><div id="leadBody"></div></section>
+</main><div id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const api=async(u,b)=>{try{const r=await fetch(u,b?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}:{});return{ok:r.ok,status:r.status,d:await r.json()}}catch(e){return{ok:false,status:0,d:{error:'Network problem. Please try again.'}}}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const TABS=[['speak','Submit feedback'],['ideas','Ideas board'],['mine','Track a submission'],['hr','HR console'],['lead','Leadership summary']];
+$('nav').innerHTML=TABS.map(([k,l])=>`<button data-k="${k}" onclick="show('${k}')">${l}</button>`).join('');
+const CHECK='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+$('pledge').innerHTML=['No login, name or IP address is stored','Dates are recorded to the week only','Results for groups under <b>5</b> people are never shown','A person in HR reviews urgent items before any action is taken'].map(t=>`<li>${CHECK}<span>${t}</span></li>`).join('');
+let CFG,KIND='concern',tm,QUEUE=[];
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2800)}
+function setTheme(d){document.documentElement.dataset.theme=d;$('tg').textContent=d==='dark'?'Light mode':'Dark mode';try{localStorage.setItem('th',d)}catch(e){}}
+function theme(){setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark')}
+try{setTheme(localStorage.getItem('th')||'light')}catch(e){}
+function show(k){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===k));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+ if(k==='hr')loadHR();if(k==='lead')loadLead();if(k==='ideas')loadIdeas();history.replaceState(null,'','#'+k);scrollTo(0,0)}
+async function init(){CFG=(await api('/api/config')).d;$('kmin').textContent=CFG.k_min;const o=CFG.departments.map(d=>`<option>${esc(d)}</option>`).join('');$('dept').innerHTML=o;$('sumDept').innerHTML='<option>All</option>'+o;
+ const L=['Very poor','Poor','Fair','Good','Excellent'];$('moods').innerHTML=L.map((l,i)=>`<button onclick="pulse(${i+1},this)"><b>${i+1}</b><span>${l}</span></button>`).join('');
+ const h=location.hash.slice(1);show(TABS.some(t=>t[0]===h)?h:'speak')}
+function kind(k){KIND=k;document.querySelectorAll('#kindSeg button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+ $('tl').textContent=k==='idea'?'Describe your idea':'Describe your concern';$('text').placeholder=k==='idea'?'What would you change, and how would it help?':'Describe what happened, when it happens, and the effect on you or the team.'}
+function typing(){const v=$('text').value;$('cc').textContent=v.length;clearTimeout(tm);if(!v.trim()){$('pv').innerHTML='<span class="mute">Your masked message will appear here as you type.</span>';return}
+ tm=setTimeout(async()=>{const r=await api('/api/preview',{text:v});if(r.ok)$('pv').innerHTML=esc(r.d.masked).replace(/\[(NAME|PHONE|EMAIL|EMP-ID|LINK)\]/g,'<span class="mk">$1 MASKED</span>')},350)}
+async function send(){const b=$('sendBtn');b.disabled=true;const r=await api('/api/submit',{text:$('text').value,department:$('dept').value,kind:KIND});b.disabled=false;
+ if(!r.ok){toast(r.d.error||'Could not submit');return}$('text').value='';$('cc').textContent=0;$('pv').innerHTML='';
+ $('done').innerHTML=`<div class="receipt"><h2>Submission received</h2><div class="small">Your receipt code is shown below. Keep it: it is the only way to check the status or read a reply, and it cannot be recovered.</div><div class="code" id="rc">${esc(r.d.receipt)}</div>
+ <div class="row"><button class="btn sm" onclick="copyRc()">Copy code</button><button class="btn g sm" onclick="$('tok').value=$('rc').textContent;show('mine');check()">Track this submission</button></div></div>`;$('done').scrollIntoView({behavior:'smooth',block:'center'})}
+function copyRc(){navigator.clipboard&&navigator.clipboard.writeText($('rc').textContent);toast('Receipt code copied')}
+async function pulse(m,btn){document.querySelectorAll('#moods button').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');const r=await api('/api/pulse',{department:$('dept').value,mood:m});$('pulseMsg').textContent=r.ok?'Thank you. Your response was recorded anonymously.':r.d.error;if(r.ok)toast('Pulse response recorded')}
+async function loadIdeas(){const r=(await api('/api/ideas')).d;let v=[];try{v=JSON.parse(localStorage.getItem('voted')||'[]')}catch(e){}
+ $('ideaList').innerHTML=r.items.map(i=>`<div class="idea"><div>${esc(i.text)}</div><button class="vote" id="v${i.id}" ${v.includes(i.id)?'disabled':''} onclick="vote(${i.id})">Support &middot; <span>${i.votes}</span></button></div>`).join('')||'<div class="card empty" style="grid-column:1/-1">No ideas have been published yet.</div>'}
+async function vote(id){const r=await api('/api/ideas/'+id+'/vote',{});if(!r.ok)return toast(r.d.error);const b=$('v'+id);b.disabled=true;b.querySelector('span').textContent=r.d.votes;try{const v=JSON.parse(localStorage.getItem('voted')||'[]');v.push(id);localStorage.setItem('voted',JSON.stringify(v))}catch(e){}toast('Your support was recorded')}
+async function check(){const t=$('tok').value.trim();if(!t)return;const r=await api('/api/status/'+encodeURIComponent(t));if(!r.ok){$('tokOut').innerHTML=`<div class="err" style="margin-top:14px">${esc(r.d.error)}. Check the code and try again.</div>`;return}
+ const st=r.d.status,ix=st==='Received'?0:st==='Under HR review'?1:2,L=['Received','Under review','Handled'];
+ $('tokOut').innerHTML=`<div class="steps">${L.map((l,i)=>`${i?`<div class="bar ${i<=ix?'done':''}"></div>`:''}<div class="step ${i<=ix?'done':''}"><div class="dot">${i<=ix?'&#10003;':i+1}</div>${l}</div>`).join('')}</div>
+ <div class="small mute">Status: <b style="color:var(--ink)">${esc(st)}</b> &middot; submitted in week ${esc(r.d.week)}</div>${r.d.reply?`<div class="bubble"><div class="small">Reply from HR</div>${esc(r.d.reply)}</div>`:''}
+ <h3>Add more information</h3><textarea id="fu" style="min-height:90px" placeholder="Add details or an update. This stays anonymous."></textarea><div style="margin-top:10px"><button class="btn sm" onclick="followup()">Send follow-up</button></div>`}
+async function followup(){const r=await api('/api/followup',{token:$('tok').value,text:$('fu').value});if(r.ok){toast('Follow-up sent');check()}else toast(r.d.error)}
+async function login(){const r=await api('/api/hr/login',{password:$('pw').value});if(r.ok){$('pw').value='';loadHR()}else $('loginErr').textContent=r.d.error}
+async function logout(){await api('/api/hr/logout',{});$('hrBody').style.display='none';$('login').style.display='block'}
+function line(points,w,h){if(!points.some(p=>p.avg!=null))return'<div class="empty small">Not enough responses yet.</div>';const X=i=>26+i*(w-46)/(points.length-1),Y=v=>h-20-(v-1)/4*(h-36);
+ let d='',pen=false;points.forEach((p,i)=>{if(p.avg==null){pen=false;return}d+=(pen?'L':'M')+X(i)+' '+Y(p.avg);pen=true});
+ return`<svg viewBox="0 0 ${w} ${h}" width="100%">${[1,2,3,4,5].map(v=>`<line x1="22" x2="${w-6}" y1="${Y(v)}" y2="${Y(v)}" stroke="currentColor" opacity=".1"/><text x="6" y="${Y(v)+3}">${v}</text>`).join('')}<path d="${d}" fill="none" stroke="#2f5fd0" stroke-width="2.5" stroke-linejoin="round"/>${points.map((p,i)=>p.avg==null?'':`<circle cx="${X(i)}" cy="${Y(p.avg)}" r="3.5" fill="#2f5fd0"/><text x="${X(i)-9}" y="${Y(p.avg)-8}">${p.avg}</text>`).join('')}${points.map((p,i)=>`<text x="${X(i)-9}" y="${h-4}">${p.week.slice(-3)}</text>`).join('')}</svg>`}
+function bars(v,w,h){const m=Math.max(...v.map(x=>x.n),1),bw=(w-30)/v.length;return`<svg viewBox="0 0 ${w} ${h}" width="100%">${v.map((x,i)=>{const bh=(h-34)*x.n/m;return`<rect x="${22+i*bw}" y="${h-20-bh}" width="${bw-10}" height="${bh}" rx="3" fill="#2f5fd0" opacity=".85"/><text x="${22+i*bw+(bw-10)/2-4}" y="${h-24-bh}">${x.n}</text><text x="${22+i*bw+(bw-10)/2-9}" y="${h-5}">${x.week.slice(-3)}</text>`}).join('')}</svg>`}
+async function loadHR(){const me=(await api('/api/hr/me')).d;if(!me.hr){$('login').style.display='block';$('hrBody').style.display='none';return}
+ $('login').style.display='none';$('hrBody').style.display='block';
+ const [q,dd,st]=await Promise.all([api('/api/hr/queue'),api('/api/hr/dashboard'),api('/api/hr/storage')]);const d=dd.d;QUEUE=q.d.items;
+ $('tiles').innerHTML=[['Awaiting review',d.pending],['Critical / High waiting',d.urgency_counts.Critical+' / '+d.urgency_counts.High],['Forecast: urgent next week',d.forecast],['Escalated',d.escalated],['Total messages',d.total],['Average mood (1-5)',d.mood_avg??'n/a']].map(([l,n])=>`<div class="kpi"><div class="l">${l}</div><div class="n">${esc(n)}</div></div>`).join('');
+ $('moodChart').innerHTML=line(d.trend,420,160);$('volChart').innerHTML=bars(d.volume,420,160);
+ const cur=$('qf').value;$('qf').innerHTML='<option value="">All teams</option>'+CFG.departments.map(x=>`<option>${esc(x)}</option>`).join('');$('qf').value=cur;drawQueue();
+ $('pend').innerHTML=q.d.ideas.map(i=>`<div class="q"><span class="chip i">Idea</span>${i.tags.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}<div style="margin:6px 0">${esc(i.text)}</div><div class="row"><button class="btn ok sm" onclick="idea(${i.id},true)">Publish to board</button><button class="btn g sm" onclick="idea(${i.id},false)">Dismiss</button></div></div>`).join('')||'<div class="empty small">No ideas are waiting.</div>';
+ const md=Object.fromEntries(d.mood_depts.map(x=>[x.department,x]));const mx=Math.max(...d.departments.map(x=>x.n||0),1);
+ $('depts').innerHTML='<table><tr><th>Team</th><th>Message volume</th><th class="num">Flagged</th><th class="num">Escalated</th><th class="num">Avg mood</th></tr>'+d.departments.map(x=>x.suppressed?`<tr><td>${esc(x.department)}</td><td colspan="4" class="mute">Hidden: fewer than ${CFG.k_min} messages</td></tr>`:`<tr><td><b>${esc(x.department)}</b></td><td><div class="row" style="flex-wrap:nowrap"><div class="meter"><i style="width:${x.n/mx*100}%"></i></div><span class="small">${x.n}</span></div></td><td class="num">${x.flagged}</td><td class="num">${x.escalated}</td><td class="num">${md[x.department].suppressed?'Hidden':md[x.department].avg}</td></tr>`).join('')+'</table>';
+ $('drafts').innerHTML=d.drafts.map(s=>`<div class="q"><b>Draft: ${esc(s.department==='All'?'Whole organisation':s.department)}</b> <span class="small mute">${s.n} messages &middot; ${s.mode==='llm'?'AI-generated':'rule-based'}</span>${s.body.dropped_quotes?`<div class="small" style="color:var(--warn)">${s.body.dropped_quotes} unverifiable quote(s) were removed automatically.</div>`:''}${s.body.error?`<div class="err">${esc(s.body.error)}</div>`:''}${themes(s.body.themes)}<div class="row"><button class="btn ok sm" onclick="sumDec(${s.id},'approve')">Approve for leadership</button><button class="btn bd sm" onclick="sumDec(${s.id},'reject')">Reject</button></div></div>`).join('');
+ const s=st.d;$('store').innerHTML=`<dt>Database file</dt><dd><code>${esc(s.path)}</code></dd><dt>Size</dt><dd>${s.size_kb} KB</dd><dt>Tables</dt><dd>feedback (${s.counts.feedback}), pulse (${s.counts.pulse}), followups (${s.counts.followups}), summaries (${s.counts.summaries})</dd><dt>Model data</dt><dd>${esc(s.training_data)}</dd>`}
+const LVC={Critical:'c',High:'h',Medium:'m',Low:'l'};
+function lvChip(u){return`<span class="lv ${LVC[u.level]}">${u.level}</span>`}
+function why(u){const sla=u.sla_hours?'respond within '+(u.sla_hours<=72?u.sla_hours+' hours':'7 days'):'no response deadline';
+ return`<div class="small mute" style="margin-top:6px">Urgency score ${u.score} &middot; ${sla}${u.overdue?' <span class="lv c">Past target</span>':''}${u.reasons.length?'<br>Why: '+u.reasons.map(esc).join(' &middot; '):''}</div>`}
+async function tryPredict(){const r=await api('/api/hr/predict',{text:$('pt').value});
+ $('pOut').innerHTML=r.ok?`<div class="q">${lvChip(r.d.urgency)}${why(r.d.urgency)}<div class="small mute" style="margin-top:6px">Stored form: ${esc(r.d.masked)}</div></div>`:`<div class="err">${esc(r.d.error)}</div>`}
+function drawQueue(){const f=$('qf').value,lv=$('qlv').value,it=QUEUE.filter(i=>(!f||i.department===f)&&(!lv||i.urgency.level===lv));
+ $('queue').innerHTML=it.length?it.slice(0,15).map(i=>`<div class="q"><div class="row">${lvChip(i.urgency)}<span class="chip ${i.kind==='idea'?'i':'k'}">${i.kind==='idea'?'Idea':'Concern'}</span>${i.tags.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}<span class="small mute">${esc(i.department)} &middot; ${esc(i.week)}</span></div>${why(i.urgency)}
+ <div style="margin:8px 0">${esc(i.text)}</div>${i.followups.map(x=>`<div class="fu"><b>Follow-up:</b> ${esc(x)}</div>`).join('')}
+ <div class="row" style="margin-top:10px"><input id="rp${i.id}" placeholder="Reply to the author (optional)" style="flex:1;min-width:220px"><button class="btn g sm" id="draftBtn${i.id}" onclick="draftReply(${i.id})">✨ Generate AI reply</button><button class="btn sm" onclick="rev(${i.id},'escalate')">Escalate</button><button class="btn g sm" onclick="rev(${i.id},'false_alarm')">No action needed</button>${i.kind==='idea'?`<button class="btn ok sm" onclick="rev(${i.id},'false_alarm',true)">No action, publish idea</button>`:''}</div><div id="draftNote${i.id}" class="small mute" style="margin-top:6px"></div></div>`).join('')+(it.length>15?`<div class="small mute">${it.length-15} more not shown. Clear items to see them.</div>`:''):'<div class="empty">The review queue is empty.</div>'}
+function themes(t){return(t||[]).map(x=>`<div class="theme"><b>${esc(x.theme)}</b> <span class="chip">${esc(x.count)} mention(s)</span><div class="small">${esc(x.summary)}</div>${(x.quotes||[]).map(q=>`<div class="quote">&ldquo;${esc(q)}&rdquo;</div>`).join('')}</div>`).join('')||'<div class="mute small">No themes found.</div>'}
+async function draftReply(id){const b=$('draftBtn'+id),note=$('draftNote'+id);b.disabled=true;b.textContent='Generating…';note.textContent='Creating a draft from the feedback and follow-ups…';const r=await api('/api/hr/draft-reply',{id});b.disabled=false;b.textContent='✨ Generate AI reply';if(!r.ok){note.textContent=r.d.error||'Could not generate a reply';return}const input=$('rp'+id);if(input)input.value=r.d.draft;note.textContent=(r.d.mode==='llm'?'AI-generated draft':'Template fallback')+'. '+(r.d.note||'Review and edit before sending.');}
+async function rev(id,decision,publish){const r=await api('/api/hr/review',{id,decision,publish:!!publish,reply:($('rp'+id)||{}).value});if(!r.ok){toast(r.d.error||'Could not update ticket');return}toast(decision==='escalate'?'Escalated':decision==='close'?'Ticket closed':publish?'Reviewed and published':'Marked as reviewed');loadHR()}
+async function idea(id,publish){await api('/api/hr/idea',{id,publish});toast(publish?'Idea published':'Idea dismissed');loadHR()}
+async function mkSummary(){$('sumMsg').textContent='Generating...';const r=await api('/api/hr/summarize',{department:$('sumDept').value});$('sumMsg').textContent=r.ok?'':r.d.error;if(r.ok)toast('Draft generated');loadHR()}
+async function sumDec(id,decision){await api('/api/hr/summary',{id,decision});toast(decision==='approve'?'Approved for leadership':'Draft removed');loadHR()}
+async function loadLead(){const r=(await api('/api/leadership')).d;$('leadBody').innerHTML=r.items.map(s=>`<div class="card"><h2>${esc(s.department==='All'?'Whole organisation':s.department)}</h2><div class="small mute">${s.n} messages analysed &middot; approved ${esc(s.created)}</div>${themes(s.body.themes)}</div>`).join('')||'<div class="card empty">No summaries have been approved yet. HR can generate and approve one from the HR console.</div>'}
+async function mkReport(){const r=await api('/api/leadership/report');if(!r.ok){toast(r.d.error||'Could not build report');return}const d=r.d,box=$('reportBox');window.REPORT=d;
+ const tb=d.teams.map(t=>t.suppressed?`<tr><td>${esc(t.department)}</td><td colspan="2" class="mute">Hidden: fewer than ${d.k_min} messages</td></tr>`:`<tr><td><b>${esc(t.department)}</b></td><td class="num">${t.n}</td><td class="num">${t.avg??'Hidden'}</td></tr>`).join('');
+ box.innerHTML=`<div class="card"><div class="row sb"><div><h2 style="font-size:20px">Leadership report</h2><div class="small mute">Generated ${esc(d.generated)} &middot; groups under ${d.k_min} people are never shown</div></div><div class="row noprint"><button class="btn g sm" onclick="window.print()">Print / save as PDF</button><button class="btn g sm" onclick="dlReport()">Download (HTML)</button><button class="btn g sm" onclick="$('reportBox').style.display='none'">Close</button></div></div>
+ <div class="kpis" style="margin-top:16px">${[['Total messages',d.total],['Concerns',d.concerns],['Ideas',d.ideas],['Reviewed by HR',d.handled],['Average mood (1-5)',d.mood_avg??'n/a']].map(([l,n])=>`<div class="kpi"><div class="l">${l}</div><div class="n">${esc(n)}</div></div>`).join('')}</div>
+ <div class="charts"><div><h3>Mood trend</h3>${line(d.trend,420,160)}</div><div><h3>Messages per week</h3>${bars(d.volume,420,160)}</div></div>
+ <h3>Teams</h3><table><tr><th>Team</th><th class="num">Messages</th><th class="num">Avg mood</th></tr>${tb}</table>
+ <h3>Top themes (approved summaries)</h3>${d.top_themes.length?d.top_themes.map(t=>`<span class="chip">${esc(t.theme)} &middot; ${t.count}</span>`).join(''):'<div class="small mute">No approved summaries yet.</div>'}
+ ${d.summaries.map(s=>`<h3>${esc(s.department==='All'?'Whole organisation':s.department)} <span class="small mute">(${s.n} messages, approved ${esc(s.created)})</span></h3>${themes(s.body.themes)}`).join('')}</div>`;
+ box.style.display='block';box.scrollIntoView({behavior:'smooth'})}
+function dlReport(){const d=window.REPORT;if(!d)return;const el=$('reportBox').cloneNode(true);el.querySelectorAll('.noprint').forEach(x=>x.remove());
+ const css=document.querySelector('style').textContent;const html='<!doctype html><meta charset="utf-8"><title>Leadership report '+d.generated+'</title><style>'+css+'</style><body style="padding:24px">'+el.innerHTML;
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.download='leadership_report_'+d.generated+'.html';a.click();URL.revokeObjectURL(a.href)}
+init();
+</script></body></html>

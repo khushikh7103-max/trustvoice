@@ -1,0 +1,6 @@
+feedback.db
+eval_results.json
+__pycache__/
+.venv/
+.env
+cloudflared.exe
